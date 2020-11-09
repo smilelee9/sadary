@@ -1,5 +1,6 @@
-# sadary
-Platform helping users meet new people, conveniently and safely.
+# 사다리
+2020 가을학기 비지니스개론(KEI330) Special Project
+COVID-19로 새로운 사람들을 만나기 어려워진 지금, 새로운 사람들을 편리하고 안전하게 만날 수 있도록 도와주는 플랫폼
 
 ## 커밋 메세지 양식
 ex) 2020-11-09 필터 완성, Sorter 디자인 완료, react-filter 적용
