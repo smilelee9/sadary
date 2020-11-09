@@ -12,9 +12,10 @@ ex) 2020-11-09 필터 완성, Sorter 디자인 완료, react-filter 적용
 yarn start
 localhost::3000 에서 시작됨
 
-## 디렉토리
-- api
-- common
-- component
-- container
-- state
+## 디렉토리 설명
+- api: functions for create, read, update, delete data from firebase realtime DB / authentication
+- common: hard-coded data for debugging, redux store
+- component: functional components not linked to redux store (mostly does not have state) [주호, 승우는 여기만 작성]
+- container: functional components linked to redux store and dispatch actions. Pass callbacks and data as props to children components 
+- state: redux actions and reducers
+- util: utilities for reusable logics
