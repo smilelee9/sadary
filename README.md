@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+# 사다리
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+2020 가을학기 비지니스개론(KEI330) Special Project
+COVID-19로 새로운 사람들을 만나기 어려워진 지금, 새로운 사람들을 편리하고 안전하게 만날 수 있도록 도와주는 플랫폼
 
-## Available Scripts
+## 커밋 메세지 양식
 
-In the project directory, you can run:
+ex) 2020-11-09 필터 완성, Sorter 디자인 완료, react-filter 적용
 
-### `yarn start`
+- 날짜 처음에
+- 기능: 한국말 (ex. 필터)
+- 수정한 파일 중에 중요한 파일: 파일 이름 그대로 (ex. Sorter)
+- 새로운 라이브러리 적용 — react-native-modal: 영어 그대로
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 실행
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+yarn start
+localhost::3000 에서 시작됨
 
-### `yarn test`
+## 디렉토리 설명
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- api: functions for create, read, update, delete data from firebase realtime DB / authentication
+- common: hard-coded data for debugging, redux store
+- component: functional components not linked to redux store (mostly does not have state) [주호, 승우는 여기만 작성]
+- container: functional components linked to redux store and dispatch actions. Pass callbacks and data as props to children components
+- state: redux actions and reducers
+- util: utilities for reusable logics

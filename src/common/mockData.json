@@ -1,0 +1,36 @@
+ {
+  "posts": [
+    {
+      "id": 1, "uid": "user1", "title": "카이스트 밥팟", "desc": "추가정보 없음",
+      "joinedUsers": ["3000", "2000"], "maxNum": 4
+    },
+    {
+      "id": 12, "uid": "user2", "title": "PS 스터디", "desc": "2021 구글 코드잼을 함께 준비할 스터디원을 모집합니다",
+      "joinedUsers": ["3000", "2000"], "maxNum": 4
+    }
+  ],
+
+  "users": {
+    "user1": {
+      "id": "user1",
+      "email": "aaaa@kaist.ac.kr",
+      "nickName": "aaa",
+      "password": "pw1",
+      "gender": "F",
+      "phoneNum": "010-1111-2222",
+      "updated_at": "2020-11-10-10-00",
+      "joinedPost": ["post1", "post2"]
+    },
+
+    "user2": {
+      "id": "user2",
+      "email": "bbbb@kaist.ac.kr",
+      "nickName": "월요일조아",
+      "gender": "M",
+      "phoneNum": "010-2222-3333",
+      "updated_at": "2020-11-10-13-27",
+      "password": "pw2"
+
+    }
+  }
+}
