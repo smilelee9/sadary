@@ -4,7 +4,8 @@ import logger from 'redux-logger';
 import reducers from '../state'
 import thunkMiddleware from 'redux-thunk'
 
-const middleware = applyMiddleware(thunkMiddleware, logger)
+const middleware = applyMiddleware(thunkMiddleware, logger)  // eslint-disable-line 
+
 export default createStore(reducers, middleware);
 
 // var rawInitState = {

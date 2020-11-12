@@ -1,7 +1,6 @@
 // import React from 'react';
 // import {authLogout} from '../../actions/AuthAction';
 // import {connect} from 'react-redux';
-// import {hashHistory} from 'react-router';
 
 import React from 'react'
 

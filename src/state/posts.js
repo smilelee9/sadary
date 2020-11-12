@@ -35,6 +35,15 @@ export const deletePost = (id) =>
       .catch(e => dispatch({ type: 'POST_DELETE_ERROR', error: e }));
   }
 
+export const getPostView = (id) =>
+  (dispatch) => {
+    dispatch({ type: 'POST_VIEW' });
+    PostApi.getPostView(id)
+      .then(post => {
+        dispatch({ type: 'POST_VIEW_SUCCESS', payload: post })
+      })
+      .catch(e => dispatch({ type: 'POST_VIEW_ERROR', error: e }));
+  }
 
 export const getPostsList = () =>
   (dispatch) => {
@@ -60,6 +69,10 @@ export function resetCurrentPost() {
     })
   }
 }
+
+export const goToHome = () => (dispatch, getState, { history }) => {
+  history.push('/');
+};
 
 const initialState = {
   lists: {
@@ -89,6 +102,7 @@ const postsReducer = (state = initialState, action) => {
 
     case 'POST_CREATE':
     case 'POST_UPDATE':
+    case 'POST_VIEW':
       return {
         ...state,
         currentPost: {
@@ -100,6 +114,7 @@ const postsReducer = (state = initialState, action) => {
 
     case 'POST_CREATE_SUCCESS':
     case 'POST_UPDATE_SUCCESS':
+    case 'POST_VIEW_SUCCESS':
       return {
         ...state,
         currentPost: {
@@ -111,11 +126,16 @@ const postsReducer = (state = initialState, action) => {
     case 'POST_LISTS_SUCCESS':
       return {
         ...state,
-        lists: action.payload
+        lists: {
+          loading: false,
+          data: action.payload,
+          error: null,
+        }
       };
 
     case 'POST_CREATE_FAILURE':
     case 'POST_UPDATE_FAILURE':
+    case 'POST_VIEW_FAILURE':
       return {
         ...state,
         currentPost: {
@@ -145,6 +165,7 @@ const postsReducer = (state = initialState, action) => {
           error: null
         }
       }
+
 
     case POST_LISTS_LOAD_MORE:
       var getCurrentItems = () => {

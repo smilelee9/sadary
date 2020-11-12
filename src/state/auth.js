@@ -1,4 +1,4 @@
-import Auth from '../api/auth';
+import AuthApi from '../api/auth';
 
 export const AUTH_LOGIN = 'auth login';
 export const AUTH_REGISTER = 'auth register';
@@ -9,12 +9,10 @@ export const AUTH_LOGOUT = 'auth logout'
 
 export function authLogin(email, password) {
   return (dispatch) => {
-    dispatch({
-      type: AUTH_LOGIN,
-      payload: {
-        userLogin: Auth.login(email, password)
-      }
-    });
+    dispatch({ type: 'AUTH_LOGIN' })
+    AuthApi.login(email, password)
+      .then(user => dispatch({ type: 'AUTH_LOGIN_SUCCESS', payload: user }))
+      .catch(e => dispatch({ type: 'AUTH_LOGIN_ERROR', error: e }));
   }
 }
 
@@ -23,7 +21,7 @@ export function authRegister(email, password, profile = {}) {
     dispatch({
       type: AUTH_REGISTER,
       payload: {
-        userRegister: Auth.register(email, password, profile)
+        userRegister: AuthApi.register(email, password, profile)
       }
     });
   }
@@ -35,7 +33,7 @@ export function updateProfile(profile) {
     dispatch({
       type: AUTH_UPDATE_PROFILE,
       payload: {
-        updateProfile: Auth.updateProfile(profile, auth.user.uid)
+        updateProfile: AuthApi.updateProfile(profile, auth.user.uid)
       }
     });
   }
@@ -48,7 +46,7 @@ export function getProfile() {
       dispatch({
         type: AUTH_GET_PROFILE,
         payload: {
-          getProfile: Auth.getProfile(auth.user.uid)
+          getProfile: AuthApi.getProfile(auth.user.uid)
         }
       });
     }
@@ -60,7 +58,7 @@ export function checkToken() {
     dispatch({
       type: AUTH_CHECK_TOKEN,
       payload: {
-        userFromToken: Auth.isAuthenticated()
+        userFromToken: AuthApi.isAuthApienticated()
       }
     })
   }
@@ -69,14 +67,18 @@ export function checkToken() {
 export function authLogout() {
   return (dispatch) => {
     dispatch({ type: AUTH_LOGOUT });
-    Auth.logout();
+    AuthApi.logout();
   }
 }
 
 const initialState = {
   authenticated: {
     guest: true,
-    user: {},
+    user: {
+      loading: false,
+      data: null,
+      error: null
+    },
     profile: {
       updated_at: '',
     }
@@ -92,7 +94,22 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case AUTH_LOGIN:
+    case 'AUTH_LOGIN':
+      return {
+        ...state,
+
+        authenticated: {
+          ...state.authenticated,
+          guest: false,
+          user: {
+            loading: true,
+            data: null,
+            error: null
+          }
+        },
+      }
+
+    case 'AUTH_LOGIN_SUCCESS':
       localStorage.setItem('authenticated', JSON.stringify(action.payload.userLogin));
       return {
         ...state,
@@ -100,7 +117,27 @@ const authReducer = (state = initialState, action) => {
         authenticated: {
           ...state.authenticated,
           guest: false,
-          user: action.payload.userLogin
+          user:
+          {
+            loading: false,
+            data: action.payload.userLogin,
+            error: null
+          }
+        },
+      }
+      
+    case 'AUTH_LOGIN_FAILURE':
+      return {
+        ...state,
+        authenticated: {
+          ...state.authenticated,
+          guest: false,
+          user:
+          {
+            loading: false,
+            data: null,
+            error: action.error
+          }
         },
       }
 

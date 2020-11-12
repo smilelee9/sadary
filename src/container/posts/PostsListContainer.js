@@ -1,5 +1,6 @@
 import { getPostsList, loadMorePosts } from '../../state/posts';
 
+import Loading from "../../component/Loading"
 import PostCreateButton from "../../component/posts/PostCreateButton";
 import PostsList from "../../component/posts/PostsList";
 import React from 'react'
@@ -8,18 +9,16 @@ import { connect } from 'react-redux'
 import { setTitle } from "../../util";
 
 function PostsListContainer(props) {
-    const { posts, currentItems, getPostsList } = props
-
     React.useEffect(() => {
-        getPostsList();
+        props.getPostsList();
         setTitle('피드')
     }, [])
-
-    console.log(props)
-
     return (
         <div>
-            <PostsList posts={props.posts} />
+            {props.posts.loading &&
+                <Loading />}
+            {props.posts.error && <div> {props.post.error} </div>}
+            {!props.posts.loading && props.posts.data && <PostsList posts={props.posts.data} />}
             <PostCreateButton />
         </div>
     )

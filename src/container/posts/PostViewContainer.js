@@ -1,17 +1,57 @@
-// import {getPostView, resetCurrentPost} from '../../actions/PostAction';
-// import {reduxAwait, setTitle} from '../../../utils/index';
+import { deletePost, getPostView, resetCurrentPost } from '../../state/posts';
 
-// import {PostView} from '../../../components/pages/posts/index';
-
+import PostView from '../../component/posts/PostView'
 import React from 'react'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
+import { setTitle } from "../../util";
 
-export default function PostViewContainer() {
+function PostViewContainer(props) {
+    const postId = props.location.pathname.slice(1)
+    const { getPostView } = props
+    const onDelete = () => {
+        if (props.post.data && props.post.data.id) {
+            let s_confirm = confirm('정말 삭제하시겠어요?') // eslint-disable-line 
+            if (s_confirm) {
+                props.deletePost(props.post.data.id);
+                props.resetCurrentPost();
+            }
+        }
+    }
+
+    console.log(props.post)
+    React.useEffect(() => {
+        props.post.data && setTitle(`${props.post.data.title}`)
+    }, [props.post])
+
+    React.useEffect(() =>
+        getPostView(postId), [getPostView, postId])
+
     return (
         <div>
-            PostViewContainer
+            {props.post.loading &&
+                <div>
+                    로딩중
+                </div>}
+            {props.post.error && <div> {props.post.error} </div>}
+            {!props.post.loading && props.post.data && <PostView {...props} onDelete={onDelete} post={props.post.data} />}
         </div>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.auth.authenticated.user,
+        post: state.posts.currentPost
+    }
+}
+
+const mapDispatchToProps = (dispatch, state) => {
+    return bindActionCreators({ getPostView, resetCurrentPost, deletePost }, dispatch);
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostViewContainer)
 
 
 // class PostViewContainer extends Component {

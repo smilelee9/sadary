@@ -1,9 +1,20 @@
+import Header from '../component/Header'
 import React from 'react'
+import { connect } from 'react-redux'
 
-export default function HeaderContainer() {
+function HeaderContainer(props) {
   return (
     <div>
-      HeaderContainer
+      <Header guest={props.guest} user={props.user.data} />
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    guest: state.auth.authenticated.guest,
+    user: state.auth.authenticated.user,
+  }
+}
+
+export default connect(mapStateToProps)(HeaderContainer)

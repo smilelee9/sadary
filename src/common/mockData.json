@@ -1,36 +1,211 @@
- {
-  "posts": [
-    {
-      "id": 1, "uid": "user1", "title": "카이스트 밥팟", "desc": "추가정보 없음",
-      "joinedUsers": ["3000", "2000"], "maxNum": 4
+{
+    "posts": {
+        "post1":         
+        {
+            "id": "post1", "type": "meal", "title": "카마에서 밥먹어요", "createdTime": "2020-11-11-13:00", 
+            "comments": ["comment1", "comment2"], "uid": "user4", "curMember": ["user4"], "location": "카이마루",
+            "possibleTime": "2020-11-11-13:00~","memberNum": 1, "prefergender": "M", "others": "2학년 희망"
+        },
+
+        "post2":        {
+            "id": "post2", "type": "meal", "title": "밥팟 구함", "createdTime": "2020-11-12-11:00", 
+            "comments": "comment3", "uid": "user6", "curMember": ["user6"], "location": "카이 롯데리아",
+            "possibleTime": "2020-11-12-13:00~","memberNum": 1, "prefergender": "F", "others": "나는야 프로혼밥러"
+        },
+"post3":        {
+            "id": "post3", "type": "study", "title": "카공 가실 분 구합니다", "createdTime": "2020-11-12-15:00", 
+            "comments": null, "uid": "user1", "curMember": ["user1","user3"], "location": "어은동 카페",
+            "possibleTime": "2020-11-12-15:00~","memberNum": 1, "prefergender": null, "others": "혼자서 집중이 안돼요"
+        },
+
+"post4":        {
+            "id": "post4", "type": "study", "title": "카공 ㄱ?", "createdTime": "2020-11-13-16:30", 
+            "comments": "comment4", "uid": "user2", "curMember": ["user1","user2","user4"], "location": "궁동 카페",
+            "possibleTime": "2020-11-13-17:00~","memberNum": 3, "prefergender": null, "others": "같이 공부해요"
+        },
+
+"post5":
+        {
+            "id": "post5", "type": "meeting", "title": "3대 3 미팅 구해요", "createdTime": "2020-11-14-19:00", 
+            "comments": null, "uid": "user3", "curMember": ["user3", "user5", "user7"], "location": "둔산동",
+            "possibleTime": "2020-11-15-19:00~","memberNum": 2, "prefergender": "M", "others": null
+        },
+        "post6":
+        {
+            "id": "post6", "type": "meeting", "title": "2대2 미팅 구해요", "createdTime": "2020-11-15-19:00", 
+            "comments": ["comment6"], "uid": "user8", "curMember": ["user8", "user9"], "location": "서울 강남",
+            "possibleTime": "2020-11-16-18:00~","memberNum": 2, "prefergender": "F", "others": "선남들이 선녀 모심"
+        },
+
+        "post7":
+        {
+            "id": "post7", "type": "game", "title": "봇듀할 서폿 구함", "createdTime": "2020-11-16-19:00", 
+            "comments": ["comment5"], "uid": "user6", "curMember": ["user6","user7"], "location": null,
+            "possibleTime": "2020-11-16-19:00~","memberNum": 1, "prefergender": null, "gameName": "롤","others": null
+        },
+        "post8":
+        {
+            "id": "post8", "type": "game", "title": "어몽어스", "createdTime": "2020-11-17-19:00", 
+            "comments": null, "uid": "user1", "curMember": ["user1"], "location": null,
+            "possibleTime": "2020-11-17-19:00~","memberNum": 1, "prefergender": null, "gameName": "어몽어스","others": "임포는 누구?"
+        }
     },
-    {
-      "id": 12, "uid": "user2", "title": "PS 스터디", "desc": "2021 구글 코드잼을 함께 준비할 스터디원을 모집합니다",
-      "joinedUsers": ["3000", "2000"], "maxNum": 4
-    }
-  ],
 
-  "users": {
-    "user1": {
-      "id": "user1",
-      "email": "aaaa@kaist.ac.kr",
-      "nickName": "aaa",
-      "password": "pw1",
-      "gender": "F",
-      "phoneNum": "010-1111-2222",
-      "updated_at": "2020-11-10-10-00",
-      "joinedPost": ["post1", "post2"]
+    "users": {
+        "user1": {
+            "id": "user1",
+            "nickName": "aaa",
+            "PW": "sunnyday",
+            "gender": "M",
+            "email": "aaa@kaist.ac.kr",
+            "phone": null,
+            "createdPost": ["post3","post8"], 
+            "joinedPost": ["post3", "post4", "post8"],
+            "commentPost": ["post1"]
+        },
+
+        "user2": {
+            "id": "user2",
+            "nickName": "bbb",
+            "PW": "rainyday",
+            "gender": "F",
+            "email": "bbb@kaist.ac.kr",
+            "phone": "010-1111-2222",
+            "createdPost": ["post4"], 
+            "joinedPost": ["post4"],
+            "commentPost": ["post1" ]       
+        },
+
+        "user3": {
+            "id": "user3",
+            "nickName": "ccc",
+            "PW": "happyday",
+            "gender": "M",
+            "email": "ccc@cnu.ac.kr",
+            "phone": null,
+            "createdPost": ["post5"], 
+            "joinedPost": ["post3","post5"],
+            "commentPost": ["post2","post4"]       
+        },
+
+        "user4": {
+            "id": "user4",
+            "nickName": "ddd",
+            "PW": "gloomyday",
+            "gender": "F",
+            "email": "ddd@cnu.ac.kr",
+            "phone": "010-3333-4444",
+            "createdPost": ["post1"], 
+            "joinedPost": ["post1", "post4"],
+            "commentPost": ["post6"]    
+        },
+
+        "user5": {
+            "id": "user5",
+            "nickName": "eee",
+            "PW": "partyday",
+            "gender": "M",
+            "email": "eee@cnu.ac.kr",
+            "phone": null,
+            "createdPost": null, 
+            "joinedPost": ["post5"],
+            "commentPost": null
+        },
+
+        "user6": {
+            "id": "user6",
+            "nickName": "fff",
+            "PW": "lovingday",
+            "gender": "F",
+            "email": "fff@kaist.ac.kr",
+            "phone": null,
+            "createdPost": ["post7"], 
+            "joinedPost": ["post2", "post7"],
+            "commentPost": null        
+        },
+
+        "user7": {
+            "id": "user7",
+            "nickName": "ggg",
+            "PW": "lovelyday",
+            "gender": "M",
+            "email": "ggg@cnu.ac.kr",
+            "phone": "010-4444-5555",
+            "createdPost": null, 
+            "joinedPost": ["post5","post7"],
+            "commentPost": null       
+        },
+
+        "user8": {
+            "id": "user8",
+            "nickName": "hhh",
+            "PW": "daydayday",
+            "gender": "M",
+            "email": "hhh@kaist.ac.kr",
+            "phone": "010-5555-6666",
+            "createdPost": ["post6"], 
+            "joinedPost": ["post6"],
+            "commentPost": ["post7"]        
+        },
+
+        "user9": {
+            "id": "user9",
+            "nickName": "iii",
+            "PW": "itismyday",
+            "gender": "M",
+            "email": "iii@kaist.ac.kr",
+            "phone": "010-6666-7777",
+            "createdPost": null, 
+            "joinedPost": ["post6"],
+            "commentPost": null       
+        },
+
+        "user10": {
+            "id": "user10",
+            "nickName": "kkk",
+            "PW": "itisyourday",
+            "gender": "F",
+            "email": "kkk@cnu.ac.kr",
+            "phone": null,
+            "createdPost": null, 
+            "joinedPost": null,
+            "commentPost": null        
+        }
     },
 
-    "user2": {
-      "id": "user2",
-      "email": "bbbb@kaist.ac.kr",
-      "nickName": "월요일조아",
-      "gender": "M",
-      "phoneNum": "010-2222-3333",
-      "updated_at": "2020-11-10-13-27",
-      "password": "pw2"
+    "comments": {
+        "comment1":
+        {
+            "id": "comment1", "uid": "user1", "postId": "post1", 
+            "createdTime": "2020-11-10-18:10","desc": "덮밥 가능?"
+        },
+
+        "comment2":
+        {
+            "id": "comment2", "uid": "user2", "postId": "post2",
+            "createdTime": "2020-11-10-18:11","desc": "시간이 안맞네요ㅜㅜ"
+        },
+        "comment3":
+        {
+            "id": "comment3", "uid": "user3", "postId": "post3",
+            "createdTime": "2020-11-12-11:12","desc": "롯데리아는 한우불고기쥬"
+        },
+        "comment4":
+        {
+            "id": "comment4", "uid": "user3", "postId": "post4", 
+            "createdTime": "2020-11-13-16:33","desc": "혹시 어느 학과?"
+        },
+        "comment5":
+        {
+            "id": "comment5", "uid": "user8", "postId": "post7",
+            "createdTime": "2020-11-16-19:14","desc": "브론즈 참여 가능?"
+        },
+        "comment6":
+        {
+            "id": "comment6", "uid": "user4", "postId": "post6", 
+            "createdTime": "2020-11-15-19:13","desc": "다들 키가 어떻게 되시죠?"
+        }
 
     }
-  }
+
 }

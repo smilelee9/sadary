@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Header() {
+export default function Header(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -48,11 +48,31 @@ export default function Header() {
                             사다리
                         </Typography>
 
-                        <NavLink exact to={'login'}>
-                            <Button variant="contained" color="white" >
-                                Log In
-                            </Button>
-                        </NavLink>
+                        {
+                            props.guest && (
+                                <div style={{ margin: 10, justifyContent: 'space-between' }}>
+                                    <Button variant="contained" color="white"> guest </Button>
+                                    <NavLink exact to={'login'} style={{ textDecoration: 'none' }}>
+                                        <Button variant="contained" color="white" >
+                                            Log In
+                                    </Button>
+                                    </NavLink>
+                                </div>
+                            )
+                        }
+
+                        {
+                            !props.guest && props.user && (
+                                <div>
+                                    {console.log(props.user)}
+                                    안녕하세요, {props.user.email}님
+                                    <Button variant="contained" color="white" >
+                                        Log Out
+                                </Button>
+                                </div>
+
+                            )
+                        }
 
                         <IconButton
                             aria-label="account of current user"

@@ -8,7 +8,7 @@ import React from 'react';
 
 export default function PostCreateButton() {
     return (
-        <NavLink exact to={'create'}>
+        <NavLink exact to={'create'} style={{ textDecoration: 'none' }}>
             <MuiThemeProvider>
                 <FloatingActionButton style={style}>
                     <ContentAdd />

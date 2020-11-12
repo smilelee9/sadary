@@ -1,26 +1,19 @@
 // Import packages
 
-import { deletePost, updatePost } from '../../state/posts';
-
 import PostForm from '../../component/posts/PostForm';
 import React from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { setTitle } from "../../util";
+import { updatePost } from '../../state/posts';
 
 // Import components
 function EditPostContainer(props) {
-    const { updatePost, post_id, deletePost, post } = props
+    const { updatePost, post } = props
     const onSubmit = (post) =>
-        updatePost(post, post_id);
+        updatePost(post, post.id);
+    // TODO redirect to /${post.id}
 
-    const onDelete = () => {
-        let s_confirm = confirm('Are you sure?') // eslint-disable-line 
-
-        if (s_confirm) {
-            deletePost(post_id);
-        }
-    }
 
     React.useEffect(() => {
         setTitle(`${post.title ? post.title : ''} 수정하기`)
@@ -29,7 +22,7 @@ function EditPostContainer(props) {
 
     return (
         <div>
-            <PostForm {...props} onSubmit={onSubmit} onDelete={onDelete} />
+            <PostForm {...props} onSubmit={onSubmit} post={post.data} />
         </div>
     )
 }
@@ -39,12 +32,11 @@ const mapStateToProps = (state, ownProps) => {
     return {
         initialValues: state.posts.currentPost,
         post: state.posts.currentPost,
-        post_id: ownProps.params.id,
     }
 }
 
 const mapDispatchToProps = (dispatch, state) => {
-    return bindActionCreators({ updatePost, deletePost }, dispatch);
+    return bindActionCreators({ updatePost }, dispatch);
 
 }
 
