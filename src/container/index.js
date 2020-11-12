@@ -15,7 +15,7 @@ export default function Root() {
         <div>
           <HeaderContainer />
           <Switch>
-            {/* <Route exact path="/register" component={RegisterContainer} /> */}
+            <Route exact path="/register" component={RegisterContainer} />
             <Route exact path="/login" component={LoginContainer} />
             {/* <Route path="logout" component={LogoutContainer} /> */}
             <Route exact path="/create" component={CreatePostContainer} />

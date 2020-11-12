@@ -3,7 +3,7 @@
 
 import React from 'react'
 
-// import Register from '../../../components/pages/member/Register';
+import Register from '../../component/member/Register'
 // import { bindActionCreators } from 'redux';
 // import { reduxForm } from 'redux-form';
 // import validator from 'validator';
@@ -11,11 +11,10 @@ import React from 'react'
 export default function RegisterContainer() {
     return (
         <div>
-            RegisterContainer
+            <Register />
         </div>
     )
 }
-
 
 
 // class RegisterContainer extends React.Component {

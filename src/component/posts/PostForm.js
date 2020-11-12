@@ -3,8 +3,6 @@ import { Link, NavLink } from 'react-router-dom'
 import { Box, Button } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import DoneIcon from '@material-ui/icons/Done';
-import FaceIcon from '@material-ui/icons/Face';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
@@ -242,29 +240,6 @@ export default function PostForm(props) {
                 </Paper>
             </main>
         </React.Fragment >
-        // <React.Fragment>
-        //     <CssBaseline />
-        //     <Container maxWidth="sm">
-        //         <div className={classes.root}>
-        //             <div className={classes.margin}>
-
-
-
-        //                 <Grid container spacing={1} alignItems="flex-end">
-        //                     <Grid item>
-        //                         <AccountCircle />
-        //                     </Grid>
-        //                     <Grid item>
-        //                         <TextField id="others" placeholder="기타사항이 있다면 적어주세요" onChange={(e, text) => setState({ ...state, title: text })} />
-        //                     </Grid>
-        //                 </Grid>
-        //             </div>
-
-
-
-        //         </div>
-        //     </Container>
-        // </React.Fragment>
     );
 }
 
