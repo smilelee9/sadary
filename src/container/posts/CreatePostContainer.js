@@ -1,58 +1,39 @@
 // Packages
 
-// import {createPost} from '../../actions/PostAction';
-// Components
-
 import PostForm from '../../component/posts/PostForm';
 import React from 'react'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
+import { createPost } from '../../state/posts';
+import { setTitle } from "../../util";
 
-export default function CreatePostContainer() {
-    const handleSubmit = () => {
+// Components
+function CreatePostContainer(props) {
 
+    const { postCreated, createPost } = props
+    const onSubmit = (post) => {
+        createPost(post)
     }
+
+    React.useEffect(() => setTitle('글 올리기'), [])
+
 
     return (
         <div>
-            <PostForm onSubmit={handleSubmit} />
+            <PostForm {...props} onSubmit={onSubmit} />
         </div>
     )
 }
 
-// class CreatePostContainer extends Component {
-//     onSubmit(post) {
-//         this.props.createPost(post);
-//     }
+const mapStateToProps = (state)=> {
+    return {
+        postCreated: state.posts.currentPost,
+    }
+}
 
-//     componentDidUpdate() {
-//         const {awaitStatuses, keyAwait, postCreated} = this.props;
-//         if (awaitStatuses[keyAwait] == 'success' && awaitStatuses.createPost) {
-//             hashHistory.push(`/posts/edit/${postCreated.id}`);
-//         }
-//         setTitle(`Create post`);
-//     }
-
-//     componentDidMount() {
-//         this.props.resetAwait([this.props.keyAwait]);
-//     }
-
-//     render() {
-//         return (
-//             <PostForm {...this.props} onSubmit={this.onSubmit.bind(this)}/>
-//         )
-//     }
-// }
-
-// const mapStateToProps = (state)=> {
-//     return {
-//         postCreated: state.posts.currentPost,
-//         formType: 'create',
-//         keyAwait: 'createPost'
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch)=> {
-//     return bindActionCreators({createPost, resetAwait}, dispatch);
-// }
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ createPost }, dispatch);
+}
 
 // const validate = (values) => {
 //     let errors = {};
@@ -72,4 +53,4 @@ export default function CreatePostContainer() {
 //     validate
 // })(CreatePostContainer);
 
-// export default reduxAwait.connect(mapStateToProps, mapDispatchToProps)(createForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePostContainer);

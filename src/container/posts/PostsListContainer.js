@@ -8,10 +8,14 @@ import { connect } from 'react-redux'
 import { setTitle } from "../../util";
 
 function PostsListContainer(props) {
+    const { posts, currentItems, getPostsList } = props
+
     React.useEffect(() => {
-        props.getPostsList();
+        getPostsList();
         setTitle('피드')
-    })
+    }, [])
+
+    console.log(props)
 
     return (
         <div>
@@ -33,3 +37,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsListContainer);
+// export default reduxAwait.connect(mapStateToProps, mapDispatchToProps)(PostsListContainer);

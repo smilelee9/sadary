@@ -18,7 +18,7 @@ firebase.default.initializeApp(firebaseConfig);
 // if (firebase.apps && !firebase.apps.length) {
 //   firebase.initializeApp(firebaseConfig);
 // }
-export var auth = firebase.default.auth();
+// export var auth = firebase.default.auth();
 
 // Get a reference to the database service
 var database = firebase.default.database();

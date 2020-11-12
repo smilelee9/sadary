@@ -10,69 +10,48 @@ export const POST_EDIT = 'post edit';
 export const POST_DELETE = 'post delete';
 export const POST_RESET = 'post reset';
 
-export function createPost(post) {
-  return (dispatch, getState) => {
-    dispatch({
-      type: POST_CREATE,
-      payload: {
-        createPost: PostApi.createPost(post, getState().auth.authenticated.user.uid)
-      }
-    });
+// thunks
+export const createPost = (post) =>
+  (dispatch, getState) => {
+    dispatch({ type: 'POST_CREATE' });
+    PostApi.createPost(post, getState().auth.authenticated.user.uid)
+      .then(post => dispatch({ type: 'POST_CREATE_SUCCESS', payload: post }))
+      .catch(e => dispatch({ type: 'POST_CREATE_ERROR', error: e }));
   }
-}
 
-export function updatePost(post, post_id) {
-  return (dispatch) => {
-    dispatch({
-      type: POST_UPDATE,
-      payload: {
-        updatePost: PostApi.updatePost(post, post_id)
-      }
-    })
+export const updatePost = (post, post_id) =>
+  (dispatch) => {
+    dispatch({ type: 'POST_UPDATE' });
+    PostApi.updatePost(post, post_id)
+      .then(post => dispatch({ type: 'POST_UPDATE_SUCCESS', payload: post }))
+      .catch(e => dispatch({ type: 'POST_UPDATE_ERROR', error: e }));
   }
-}
 
-export function getPostsList() {
-  return (dispatch) => {
-    dispatch({
-      type: POST_LISTS,
-      payload: {
-        getPosts: PostApi.getPostsList()
-      }
-    });
+export const deletePost = (id) =>
+  (dispatch) => {
+    dispatch({ type: 'POST_DELETE' });
+    PostApi.deletePost(id)
+      .then(res => dispatch({ type: 'POST_DELETE_SUCCESS', payload: res }))
+      .catch(e => dispatch({ type: 'POST_DELETE_ERROR', error: e }));
   }
-}
 
-export function getPostView(id) {
-  return (dispatch) => {
-    dispatch({
-      type: POST_VIEW,
-      payload: {
-        getPost: PostApi.getPost(id)
-      }
-    })
+
+export const getPostsList = () =>
+  (dispatch) => {
+    dispatch({ type: 'POST_LISTS' });
+    PostApi.getPostsList()
+      .then(posts => dispatch({ type: 'POST_LISTS_SUCCESS', payload: posts }))
+      .catch(e => dispatch({ type: 'POST_LISTS_ERROR', error: e }));
   }
-}
 
-export function deletePost(id) {
-  return (dispatch) => {
-    dispatch({
-      type: POST_DELETE,
-      payload: {
-        deletePost: PostApi.deletePost(id)
-      }
-    })
-  }
-}
 
-export function loadMorePosts(loadMore = postsList.perPage) {
-  return (dispatch) => {
+export const loadMorePosts = (loadMore = postsList.perPage) =>
+  (dispatch) => {
     dispatch({
       type: POST_LISTS_LOAD_MORE,
       loadMore: loadMore
     })
   }
-}
 
 export function resetCurrentPost() {
   return (dispatch) => {
@@ -83,35 +62,88 @@ export function resetCurrentPost() {
 }
 
 const initialState = {
-  lists: [],
+  lists: {
+    loading: false,
+    data: null,
+    error: null
+  },
   currentItems: postsList.perPage, //pagination
   currentPost: {
-    user: {}
+    loading: false,
+    data: null,
+    error: null
   }
 }
 
 const postsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case POST_LISTS:
+    case 'POST_LISTS':
       return {
         ...state,
-        lists: action.payload.getPosts
+        lists: {
+          loading: true,
+          data: null,
+          error: null
+        }
       };
-    case POST_CREATE:
+
+    case 'POST_CREATE':
+    case 'POST_UPDATE':
       return {
         ...state,
-        currentPost: action.payload.createPost
-      }
-    case POST_VIEW:
-      return {
-        ...state,
-        currentPost: action.payload.getPost
+        currentPost: {
+          loading: true,
+          data: null,
+          error: null
+        }
       }
 
-    case POST_RESET:
+    case 'POST_CREATE_SUCCESS':
+    case 'POST_UPDATE_SUCCESS':
       return {
         ...state,
-        currentPost: { user: {} }
+        currentPost: {
+          loading: false,
+          data: action.payload,
+          error: null,
+        }
+      }
+    case 'POST_LISTS_SUCCESS':
+      return {
+        ...state,
+        lists: action.payload
+      };
+
+    case 'POST_CREATE_FAILURE':
+    case 'POST_UPDATE_FAILURE':
+      return {
+        ...state,
+        currentPost: {
+          loading: false,
+          data: null,
+          error: action.error,
+        }
+      }
+
+    case 'POST_LISTS_FAILURE':
+      return {
+        ...state,
+        lists: {
+          loading: false,
+          data: null,
+          error: action.error,
+        }
+      }
+
+    case 'POST_DELETE_SUCCESS':
+    case 'POST_RESET':
+      return {
+        ...state,
+        currentPost: {
+          loading: false,
+          data: null,
+          error: null
+        }
       }
 
     case POST_LISTS_LOAD_MORE:
@@ -124,6 +156,7 @@ const postsReducer = (state = initialState, action) => {
       return {
         ...state, currentItems: getCurrentItems()
       }
+
 
     default:
       return state;

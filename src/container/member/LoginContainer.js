@@ -33,7 +33,6 @@ function LoginContainer(props) {
             <Button onClick={user1Login}> user1 로그인 </Button>
             <Button onClick={user2Login}> user2 로그인 </Button>
             <Login {...props} onSubmit={onSubmit} />
-
         </div>
     )
 }

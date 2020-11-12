@@ -1,67 +1,52 @@
 // Import packages
 
-// import {deletePost, getPostView, updatePost} from '../../actions/PostAction';
+import { deletePost, updatePost } from '../../state/posts';
 
 import PostForm from '../../component/posts/PostForm';
 import React from 'react'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
+import { setTitle } from "../../util";
 
 // Import components
-export default function EditPostContainer() {
+function EditPostContainer(props) {
+    const { updatePost, post_id, deletePost, post } = props
+    const onSubmit = (post) =>
+        updatePost(post, post_id);
+
+    const onDelete = () => {
+        let s_confirm = confirm('Are you sure?') // eslint-disable-line 
+
+        if (s_confirm) {
+            deletePost(post_id);
+        }
+    }
+
+    React.useEffect(() => {
+        setTitle(`${post.title ? post.title : ''} 수정하기`)
+    }, [])
+
+
     return (
         <div>
-            
+            <PostForm {...props} onSubmit={onSubmit} onDelete={onDelete} />
         </div>
     )
 }
 
 
-// export class EditPostContainer extends Component {
-//     onSubmit(post) {
-//         this.props.updatePost(post, this.props.post_id);
-//     }
+const mapStateToProps = (state, ownProps) => {
+    return {
+        initialValues: state.posts.currentPost,
+        post: state.posts.currentPost,
+        post_id: ownProps.params.id,
+    }
+}
 
-//     onDelete() {
-//         let s_confirm = confirm('Are you sure?')
-//         if(s_confirm){
-//             this.props.deletePost(this.props.post_id);
-//         }
-//     }
+const mapDispatchToProps = (dispatch, state) => {
+    return bindActionCreators({ updatePost, deletePost }, dispatch);
 
-//     componentDidMount() {
-//         this.props.getPostView(this.props.post_id);
-//         this.props.resetAwait(['updatePost', 'deletePost']);
-//     }
-
-//     componentDidUpdate() {
-//         if (this.props.awaitStatuses.deletePost == 'success') {
-//             hashHistory.push('posts');
-//         }
-//         setTitle(`Edit post ${this.props.post.title ? this.props.post.title : ''}`)
-//     }
-
-//     render() {
-//         return (
-//             <div>
-//                 <PostForm {...this.props} onSubmit={this.onSubmit.bind(this)} onDelete={this.onDelete.bind(this)}/>
-//             </div>
-//         )
-//     }
-// }
-
-// const mapStateToProps = (state, ownProps)=> {
-//     return {
-//         initialValues: state.posts.currentPost,
-//         post: state.posts.currentPost,
-//         post_id: ownProps.params.id,
-//         formType: 'edit',
-//         keyAwait: "updatePost"
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch, state)=> {
-//     return bindActionCreators({updatePost, getPostView, deletePost, resetAwait}, dispatch);
-
-// }
+}
 
 // const validate = (values) => {
 //     let errors = {};
@@ -81,4 +66,4 @@ export default function EditPostContainer() {
 //     validate
 // })(EditPostContainer);
 
-// export default reduxAwait.connect(mapStateToProps, mapDispatchToProps)(editorForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EditPostContainer);

@@ -1,13 +1,12 @@
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CSSBaseLine';
 import IconButton from '@material-ui/core/IconButton';
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -49,6 +48,12 @@ export default function Header() {
                             사다리
                         </Typography>
 
+                        <NavLink exact to={'login'}>
+                            <Button variant="contained" color="white" >
+                                Log In
+                            </Button>
+                        </NavLink>
+
                         <IconButton
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
@@ -59,6 +64,7 @@ export default function Header() {
                         >
                             <AccountCircle />
                         </IconButton>
+
                     </Toolbar>
                 </AppBar>
             </div>

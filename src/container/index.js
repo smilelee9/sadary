@@ -19,15 +19,15 @@ export default function Root() {
         <div>
           <Header />
 
-          <Route exact path="/register" component={RegisterContainer} />
+          {/* <Route exact path="/register" component={RegisterContainer} /> */}
           <Route exact path="/login" component={LoginContainer} />
           {/* <Route path="logout" component={LogoutContainer} /> */}
           <Route exact path="/create">
             <CreatePostContainer />
           </Route>
-          <Route exact path="/edit/:id" component={EditPostContainer} />
+          {/* <Route exact path="/edit/:id" component={EditPostContainer} /> */}
           <Route exact path="/">
-            <PostsListContainer/>
+            <PostsListContainer />
           </Route>
 
         </div>
